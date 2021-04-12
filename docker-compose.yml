@@ -1,0 +1,24 @@
+services:
+  
+  fluentd1:
+    build: .
+    volumes:
+      - ./fluent.conf:/fluentd/etc/fluent.conf
+      - ./application_default_credentials.json:/etc/google/auth/application_default_credentials.json
+
+
+  fluentd2:
+    extends:
+      service: fluentd1
+
+  haproxy:
+    image: "haproxy:2.3-alpine"
+    ports:
+      - 80:80
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+
+  fluent-bit:
+    image: fluent/fluent-bit
+    volumes:
+      - ./fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
