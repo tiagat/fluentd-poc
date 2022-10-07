@@ -10,7 +10,7 @@ docker build . --tag tiagat/fluentd:X.X.X
 
 ```bash
 # Post a record with the tag "studio.log"
-$ curl -u fluentd:password -X POST -d 'json={"message":"OK"}' http://localhost:9880/studio.log
+$ curl -X POST -d 'json={"message":"OK"}' http://localhost:9880/studio.log
 ```
 
 
